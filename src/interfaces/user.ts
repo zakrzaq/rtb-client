@@ -39,3 +39,7 @@ export interface User {
 
 }
 
+export interface UserSession {
+  userId: string;
+}
+
