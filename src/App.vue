@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { computed } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 
-const routePath = computed(() => useRoute().path)
-const buttonName = computed(() => routePath.value === '/report' ? 'Home' : 'View Access Report');
-const buttonTo = computed(() => routePath.value === '/report' ? 'Home' : 'Report');
+const routePath = computed(() => useRoute().path);
+const buttonName = computed(() =>
+  routePath.value === "/report" ? "Home" : "View Access Report",
+);
+const buttonTo = computed(() =>
+  routePath.value === "/report" ? "Home" : "Report",
+);
 </script>
 
 <template>
   <header class="navbar">
-    <RouterLink :to="{ name: buttonTo }" class="cta">
+    <RouterLink
+      :to="{ name: buttonTo }"
+      class="cta"
+    >
       {{ buttonName }}
     </RouterLink>
   </header>

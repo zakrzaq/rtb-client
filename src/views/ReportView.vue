@@ -1,9 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    Report
-  </div>
+  <div>Report</div>
 </template>
 
 <style scoped></style>

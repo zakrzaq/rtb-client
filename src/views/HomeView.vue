@@ -2,33 +2,38 @@
 import { ref, onMounted, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { loremTen } from "@/data/lorem";
-import { useUserStore } from '@/store/userStore'
-import { useElementSeen } from '@/composables/useElementSeen.ts'
-
+import { useUserStore } from "@/store/userStore";
+import { useElementSeen } from "@/composables/useElementSeen.ts";
 
 const targetImage = ref(null);
-const userStore = useUserStore()
-const { user } = storeToRefs(userStore)
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 const { elementSeen } = useElementSeen(targetImage);
 
-watch(elementSeen, (newVal) => userStore.elementSeen = newVal)
+watch(elementSeen, (newVal) => (userStore.elementSeen = newVal));
 
-onMounted(() => userStore.getUser())
+onMounted(() => userStore.getUser());
 </script>
 
 <template>
   <div>
-    <p v-for="(lor, ind) in loremTen" :key="ind">
-      {{ ind+1 }}). {{ lor }}
+    <p
+      v-for="(lor, ind) in loremTen"
+      :key="ind"
+    >
+      {{ ind + 1 }}). {{ lor }}
     </p>
-    <img 
-      v-if="user" 
-      :src="user.avatar" 
-      :alt="`avatar of ${user.first_name} ${user.last_name}`" 
+    <img
+      v-if="user"
       ref="targetImage"
-    />
-    <p v-for="(lor, ind) in loremTen" :key="ind">
-      {{ ind+11 }}). {{ lor }}
+      :src="user.avatar"
+      :alt="`avatar of ${user.first_name} ${user.last_name}`"
+    >
+    <p
+      v-for="(lor, ind) in loremTen"
+      :key="ind"
+    >
+      {{ ind + 11 }}). {{ lor }}
     </p>
   </div>
 </template>
