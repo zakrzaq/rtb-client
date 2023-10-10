@@ -1,24 +1,25 @@
 <script setup lang="ts">
-const test = () => console.log('test')
+import { computed } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
+
+const routePath = computed(() => useRoute().path)
+const buttonName = computed(() => routePath.value === '/report' ? 'Home' : 'View Access Report');
+const buttonTo = computed(() => routePath.value === '/report' ? 'Home' : 'Report');
 </script>
 
 <template>
-  <div>
-    hello
-  </div>
+  <header class="navbar">
+    <RouterLink :to="{ name: buttonTo }" class="cta">
+      {{ buttonName }}
+    </RouterLink>
+  </header>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.navbar {
+  margin-bottom: 25px;
 }
 </style>
