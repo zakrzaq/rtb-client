@@ -1,5 +1,3 @@
-import type { UserAccess } from '@/interfaces/userAccess'
-
 const baseUrl = import.meta.env.VITE_API_URL
 const url = `${baseUrl}/user-access`
 
