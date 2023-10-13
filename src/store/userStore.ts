@@ -7,6 +7,7 @@ import {
   saveUserData,
 } from "@/helpers/userSession";
 import { fetchUser } from "@/services/api/user";
+import { fetchPostUserAccess } from '@/services/server/userAccess'
 import { User } from "@/interfaces/user";
 
 const { userId: sessionUserId } = loadUserSession();
@@ -21,12 +22,14 @@ export const useUserStore = defineStore("user", () => {
     const { userId: sessionUserId } = loadUserSession();
     if (sessionUserId === "no_user_id") {
       user.value = await fetchUser();
+      await fetchPostUserAccess(user.value?.id.toString());
       saveUserData(user.value);
       // WARN : not a PRODUCTION grade solution
       // this is enable user data being persisted on reload
-      // since API doesn't support query by ID
+      // since random API doesn't support query by ID
     }
     if (sessionUserId !== userId.value) {
+      await fetchPostUserAccess(user.value?.id.toString());
       user.value = await fetchUser(userId.value);
       saveUserData(user.value);
     }
