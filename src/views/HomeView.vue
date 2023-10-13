@@ -21,13 +21,23 @@ onMounted(() => userStore.getUser());
 
 <template>
   <div>
-    <p v-for="(lor, ind) in loremTen" :key="ind">{{ ind + 1 }}). {{ lor }}</p>
+    <p
+      v-for="(lor, ind) in loremTen"
+      :key="ind"
+    >
+      {{ ind + 1 }}). {{ lor }}
+    </p>
     <img
       v-if="user"
       ref="targetImage"
       :src="user.avatar"
       :alt="`avatar of ${user.first_name} ${user.last_name}`"
-    />
-    <p v-for="(lor, ind) in loremTen" :key="ind">{{ ind + 11 }}). {{ lor }}</p>
+    >
+    <p
+      v-for="(lor, ind) in loremTen"
+      :key="ind"
+    >
+      {{ ind + 11 }}). {{ lor }}
+    </p>
   </div>
 </template>
