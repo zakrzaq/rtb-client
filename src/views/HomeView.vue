@@ -3,11 +3,15 @@ import { ref, onMounted, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { loremTen } from "@/data/lorem";
 import { useUserStore } from "@/store/userStore";
+import { useUiStore } from "@/store/uiStore";
 import { useElementSeen } from "@/composables/useElementSeen.ts";
 import { fetchPatchUserAccess } from "@/services/server/userAccess";
+import BaseLoader from '@/components/BaseLoader.vue';
+import BaseErrorBanner from '@/components/BaseErrorBanner.vue'
 
 const targetImage = ref(null);
 const userStore = useUserStore();
+const uiStore = useUiStore();
 const { user } = storeToRefs(userStore);
 const { elementSeen } = useElementSeen(targetImage);
 
@@ -20,7 +24,11 @@ onMounted(() => userStore.getUser());
 </script>
 
 <template>
-  <div>
+  <BaseErrorBanner v-if="uiStore.isError">
+    {{ uiStore.error }}
+  </BaseErrorBanner>
+  <BaseLoader v-else-if="uiStore.isLoading" />
+  <div v-else>
     <p
       v-for="(lor, ind) in loremTen"
       :key="ind"
