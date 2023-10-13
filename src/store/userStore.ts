@@ -4,6 +4,7 @@ import {
   loadUserSession,
   loadUserData,
   saveUserData,
+  saveUserSession,
 } from "@/helpers/userSession";
 import { fetchUser } from "@/services/api/user";
 import { fetchPostUserAccess } from "@/services/server/userAccess";
@@ -15,7 +16,7 @@ const { userId: sessionUserId } = loadUserSession();
 const userData = loadUserData();
 
 export const useUserStore = defineStore("user", () => {
-  const userId = ref<string | undefined>(sessionUserId);
+  const userId = ref<string | undefined | null>(sessionUserId);
   const elementSeen = ref(false);
   const user = ref<User | undefined | null>(userData);
 
@@ -24,19 +25,21 @@ export const useUserStore = defineStore("user", () => {
     uiStore.error = undefined;
     try {
       const { userId: sessionUserId } = loadUserSession();
-      if (sessionUserId === "no_user_id") {
-        // TODO: get rid of this!
+      if (sessionUserId === null) {
         user.value = await fetchUser();
         await fetchPostUserAccess(user.value?.id.toString());
         saveUserData(user.value);
+        saveUserSession(user.value?.id.toString());
         // WARN : not a PRODUCTION grade solution
-        // this is enable user data being persisted on reload
+        // as this object contains sensitive data.
+        // Implemented to enable user data being persisted on page reload
         // since random API doesn't support query by ID
       }
       if (sessionUserId !== userId.value) {
         await fetchPostUserAccess(user.value?.id.toString());
         user.value = await fetchUser(userId.value);
         saveUserData(user.value);
+        saveUserSession(user.value?.id.toString());
       }
       if (sessionUserId === userId.value) user.value = loadUserData();
       userId.value = user.value?.id.toString();

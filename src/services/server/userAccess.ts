@@ -13,9 +13,7 @@ export const fetchPostUserAccess = async (userId: string | undefined) => {
     return response.json();
   } catch (error: unknown) {
     console.error(error);
-    return {
-      message: (error as Error).message || "Not able to process request",
-    };
+    throw new Error((error as Error).message || "Not able to process request")
   }
 };
 
@@ -34,8 +32,6 @@ export const fetchPatchUserAccess = async (
     return response.json();
   } catch (error: unknown) {
     console.error(error);
-    return {
-      message: (error as Error).message || "Not able to process request",
-    };
+    throw new Error((error as Error).message || "Not able to process request")
   }
 };
