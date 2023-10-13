@@ -7,7 +7,7 @@ import {
   saveUserData,
 } from "@/helpers/userSession";
 import { fetchUser } from "@/services/api/user";
-import { fetchPostUserAccess } from '@/services/server/userAccess'
+import { fetchPostUserAccess } from "@/services/server/userAccess";
 import { User } from "@/interfaces/user";
 
 const { userId: sessionUserId } = loadUserSession();

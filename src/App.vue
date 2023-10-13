@@ -13,10 +13,7 @@ const buttonTo = computed(() =>
 
 <template>
   <header class="navbar">
-    <RouterLink
-      :to="{ name: buttonTo }"
-      class="cta"
-    >
+    <RouterLink :to="{ name: buttonTo }" class="cta">
       {{ buttonName }}
     </RouterLink>
   </header>

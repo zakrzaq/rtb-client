@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { fetchReport } from '../services/server/report'
+import { ref, onMounted } from "vue";
+import { fetchReport } from "../services/server/report";
 
-const totalVisits = ref<number | null>()
-const seenPercentageVisits = ref<number | null>()
+const totalVisits = ref<number | null>();
+const seenPercentageVisits = ref<number | null>();
 
 onMounted(async () => {
-  const { total, seenPercentage } = await fetchReport()
-  totalVisits.value = total
-  seenPercentageVisits.value = seenPercentage
-})
+  const { total, seenPercentage } = await fetchReport();
+  totalVisits.value = total;
+  seenPercentageVisits.value = seenPercentage;
+});
 </script>
 
 <template>
