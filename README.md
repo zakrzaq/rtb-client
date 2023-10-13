@@ -1,6 +1,37 @@
-# Vue 3 + TypeScript + Vite
+# RTB-Client
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## requirements
+
+node.js - 18.18
+make
+docker
+
+## Setup
+
+To be used as git submodule to [rtb-house](https://github.com/zakrzaq/rtb-house) in `./client` directory.
+
+Or for standalone use:
+
+1. .env
+
+- setup `.env` file. [example](#environment-variables)
+
+2. local setup:
+
+- run `npm install`
+- to run as a local instance run `npm run dev`
+
+3. docker setup:
+
+- to build the Docker image execute `make build:dev`
+- to run the Docker image execute 'docker run -it -p 8080:8080 rtb/client'
+
+### ENVIRONMENT VARIABLES
+
+```
+VITE_API_URL=http://localhost:3030/api
+
+```
 
 ## Recommended IDE Setup
 

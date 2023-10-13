@@ -8,7 +8,7 @@ export const loadUserSession = () => {
   const keyValue = sessionStorage.getItem("USER");
   return keyValue
     ? (JSON.parse(keyValue) as UserSession)
-    : { userId: "no_user_id" };
+    : { userId: null };
 };
 
 export const saveUserData = (data: User | undefined | null) => {
